@@ -11,7 +11,7 @@ namespace HospitalService.Migrations
                 name: "Doctors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    DoctorId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -20,7 +20,7 @@ namespace HospitalService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Doctors", x => x.Id);
+                    table.PrimaryKey("PK_Doctors", x => x.DoctorId);
                 });
         }
 

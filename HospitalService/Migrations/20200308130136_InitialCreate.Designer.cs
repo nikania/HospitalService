@@ -22,7 +22,7 @@ namespace HospitalService.Migrations
 
             modelBuilder.Entity("HospitalService.Models.Doctor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DoctorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -39,7 +39,7 @@ namespace HospitalService.Migrations
                     b.Property<string>("Specialization")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("DoctorId");
 
                     b.ToTable("Doctors");
                 });

@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200516050522_AddedCardsPatientsRecords.cs" />
+    <Compile Remove="Migrations\20200516050522_AddedCardsPatientsRecords.Designer.cs" />
+    <Compile Remove="Migrations\20200516052208_AddedCardsRecordsPatients.cs" />
+    <Compile Remove="Migrations\20200516052208_AddedCardsRecordsPatients.Designer.cs" />
+    <Compile Remove="Migrations\20200516052743_AddedCardsRecordsPatients.cs" />
+    <Compile Remove="Migrations\20200516052743_AddedCardsRecordsPatients.Designer.cs" />
+    <Compile Remove="Migrations\20200516052816_AddedCardsRecordsPatients.cs" />
+    <Compile Remove="Migrations\20200516052816_AddedCardsRecordsPatients.Designer.cs" />
+    <Compile Remove="Migrations\20200516053123_AddedCardsRecordsPatients.cs" />
+    <Compile Remove="Migrations\20200516053123_AddedCardsRecordsPatients.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="linq2db" Version="2.9.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
@@ -12,7 +25,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.2" />
   </ItemGroup>
 
