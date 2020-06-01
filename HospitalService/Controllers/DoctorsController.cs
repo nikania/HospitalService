@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalService.Data;
 using HospitalService.Models;
+using HospitalService.Services;
 //using LinqToDB;
 //using LinqToDB;
 //using LinqToDB;
@@ -18,16 +19,17 @@ namespace HospitalService.Controllers
     [ApiController]
     public class DoctorsController : ControllerBase
     {
-        private readonly HospitalDBContext _context;
-        public DoctorsController(HospitalDBContext context)
+        private readonly IDoctorService _service;
+
+        public DoctorsController(IDoctorService service)
         {
-            _context = context;
+            _service = service;
         }
         // GET: api/Test
         [HttpGet]
         public async Task<IActionResult> GetDoctors()
         {
-            var doctors = await _context.Doctors.ToListAsync();
+            var doctors = await _service.GetDoctors();
 
             return Ok(doctors); 
         }
@@ -36,7 +38,7 @@ namespace HospitalService.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> GetDoctor(int id)
         {
-            var doctor = await _context.Doctors.FirstOrDefaultAsync(x => x.DoctorId == id);
+            var doctor = await _service.GetDoctor(id);
 
             return Ok(doctor);
         }
@@ -45,8 +47,7 @@ namespace HospitalService.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDoctorsPatients(int doctorId)
         {
-            var patients = await _context.Patients
-                                            .Where(x => x.Card.Records.Where(x => x.DoctorId == doctorId) != null).ToListAsync();
+            var patients = await _service.GetDoctorPatients(doctorId);
             return Ok(patients);
         }
 
@@ -54,9 +55,8 @@ namespace HospitalService.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Doctor doctor)
         {
-            await _context.Doctors.AddAsync(doctor);
-            await _context.SaveChangesAsync();
-            return Created(string.Empty, doctor);
+            var createdDoctor = await _service.CreateDoctor(doctor);
+            return Created(string.Empty, createdDoctor);
         }
 
         //[HttpPost("test")]
@@ -70,18 +70,15 @@ namespace HospitalService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Doctor doctor)
         {
-            _context.Doctors.Update(doctor);
-            await _context.SaveChangesAsync();
-            return Ok(doctor);
+            var changedDoctor = await _service.ChangeDoctor(doctor);
+            return Ok(changedDoctor);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var doctor = await _context.Doctors.SingleAsync(x => x.DoctorId == id);
-            _context.Doctors.Remove(doctor);
-            await _context.SaveChangesAsync();
+            var doctor = await _service.DeleteDoctor(id);
             return Ok(doctor);
         }
     }
